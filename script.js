@@ -199,8 +199,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     // === END: New Code for Sidebar & Details ===
     // ==========================================
-// Wait for the HTML document to fully load before running scripts
-document.addEventListener('DOMContentLoaded', function() {
+    // Wait for the HTML document to fully load before running scripts
+    document.addEventListener('DOMContentLoaded', function() {
 
     // --- Populate "Your Stock Portfolio" Row ---
     // ... (existing code) ...
@@ -269,7 +269,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // === END: New Code for Time Range Buttons ===
     // ===============================================
 
-    
 
 }); // End of DOMContentLoaded listener
 
