@@ -12,10 +12,9 @@
     <div class="dashboard-container">
 
         <aside class="sidebar">
-            <div class="sidebar-header">
+             <div class="sidebar-header">
                 <h1 class="sidebar-title">AI WATCHLIST</h1>
             </div>
-
             <div class="sidebar-watchlist">
                 <a href="#" class="watchlist-item">
                     <span class="watchlist-ticker">S&P 500</span>
@@ -31,24 +30,25 @@
                         <span class="watchlist-change positive">+1.11%</span>
                     </div>
                 </a>
-                 </div>
-
+            </div>
              <nav class="sidebar-menu">
                 <h3 class="menu-title">MAIN MENU</h3>
                 <ul>
                     <li>
-                        <a href="#" class="menu-item active"> <i class="fas fa-home menu-icon"></i> <span class="menu-text">Home</span>
+                        <a href="#" class="menu-item active">
+                            <i class="fas fa-home menu-icon"></i>
+                            <span class="menu-text">Home</span>
                         </a>
                     </li>
                     <li>
                         <a href="#" class="menu-item">
-                            <i class="fas fa-chart-pie menu-icon"></i> <span class="menu-text">Your Portfolio</span>
+                            <i class="fas fa-chart-pie menu-icon"></i>
+                            <span class="menu-text">Your Portfolio</span>
                         </a>
                     </li>
-                    </ul>
+                </ul>
              </nav>
-
-             </aside>
+        </aside>
 
         <main class="main-content">
 
@@ -71,25 +71,6 @@
                 <section class="stock-portfolio-row">
                     <h2>Your Stock Portfolio</h2>
                     <div class="cards-container">
-                        <div class="stock-card">
-                             <div class="card-top">
-                                <div class="stock-info">
-                                    <img src="placeholder-logo.png" alt="Stock Logo" class="stock-logo">
-                                    <span class="stock-name">Apple, Inc</span>
-                                </div>
-                                <div class="stock-ticker-perf">
-                                    <span class="stock-ticker">AAPL</span>
-                                    <span class="stock-perf positive">+0.66%</span>
-                                </div>
-                            </div>
-                            <div class="card-bottom">
-                                <div class="portfolio-value">
-                                    <span class="portfolio-label">Portfolio</span>
-                                    <span class="portfolio-amount">15,215.70</span>
-                                </div>
-                                <div class="mini-chart"></div>
-                            </div>
-                        </div>
                         </div>
                 </section>
 
@@ -136,26 +117,6 @@
                                 <span class="detail-value">5,363.36</span>
                             </div>
                             <div class="detail-item">
-                                <span class="detail-key">Day Range</span>
-                                <span class="detail-value">5,358.02 - 5,459.46</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-key">Year Range</span>
-                                <span class="detail-value">4,835.04 - 6,147.43</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-key">Market Cap</span>
-                                <span class="detail-value">$40.3 T USD</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-key">Volume</span>
-                                <span class="detail-value">2,924,736</span>
-                            </div>
-                             <div class="detail-item">
-                                <span class="detail-key">Dividend Yield</span>
-                                <span class="detail-value">1.43%</span>
-                            </div>
-                             <div class="detail-item">
                                 <span class="detail-key">P/E Ratio</span>
                                 <span class="detail-value">31.08</span>
                             </div>
@@ -168,5 +129,8 @@
                     </div>
                 </aside>
 
-            </div> </main> </div> </body>
+            </div> </main> </div> <script src="data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
 </html>
