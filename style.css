@@ -1,0 +1,100 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: sans-serif; /* Basic font, change later based on design */
+    background-color: #f4f7fa; /* Light background for the page - Matches Design */
+}
+
+/* Main dashboard layout using Grid */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 240px 1fr; /* Fixed width sidebar, rest for main content */
+    grid-template-rows: 1fr; /* Take full height */
+    height: 100vh; /* Full viewport height */
+}
+
+.sidebar {
+    background-color: #ffffff; /* White sidebar - Matches Design */
+    padding: 20px;
+    border-right: 1px solid #e0e0e0; /* Subtle border */
+}
+
+.main-content {
+    display: flex; /* Use flex to structure top-bar and dashboard-grid vertically */
+    flex-direction: column;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+.top-bar {
+    background-color: #ffffff; /* White top bar - Matches Design */
+    padding: 15px 30px;
+    border-bottom: 1px solid #e0e0e0; /* Subtle border */
+    height: 65px; /* Fixed height for top bar */
+    display: flex; /* Use flex for items inside top-bar later */
+    align-items: center;
+    /* Prevent top-bar from shrinking */
+    flex-shrink: 0;
+}
+
+/* Grid layout for the main dashboard area */
+.dashboard-grid {
+    padding: 30px; /* Padding around the grid */
+    flex-grow: 1; /* Allow grid to take remaining vertical space */
+    display: grid;
+    /* Define grid columns based on "Desktop - 1": main area and details panel */
+    grid-template-columns: 2fr 1fr; /* Adjust fractions as needed */
+    /* Define grid rows: stock row, main chart */
+    grid-template-rows: auto 1fr; /* Auto height for stock row, rest for chart */
+    gap: 30px; /* Increased spacing between grid items */
+    /* Define areas for easier placement (optional but helpful) */
+    grid-template-areas:
+        "portfolio-row details"
+        "main-chart    details";
+}
+
+/* Assign grid areas */
+.stock-portfolio-row {
+    grid-area: portfolio-row;
+    background-color: #ffffff; /* White background - Matches Design */
+    padding: 15px;
+    border-radius: 8px; /* Slightly rounded corners */
+}
+
+.main-chart-area {
+    grid-area: main-chart;
+    background-color: #ffffff; /* White background - Matches Design */
+    padding: 15px;
+    border-radius: 8px; /* Slightly rounded corners */
+    display: flex;
+    flex-direction: column;
+}
+
+.details-panel {
+    grid-area: details;
+    background-color: #ffffff; /* White background - Matches Design */
+    padding: 15px;
+    border-radius: 8px; /* Slightly rounded corners */
+}
+
+/* Basic content styling */
+h2 {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #333; /* Default heading color */
+}
+
+#portfolioChart {
+    max-width: 100%; /* Ensure chart canvas doesn't overflow */
+    flex-grow: 1; /* Allow chart to grow vertically */
+}
+
+/* Remove placeholder styling for paragraphs */
+.sidebar p, .top-bar p, .stock-portfolio-row p, .main-chart-area p, .details-panel p {
+    color: inherit; /* Use default text color instead of gray */
+}
