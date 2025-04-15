@@ -60,36 +60,62 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Add Event Listeners for Time Range Buttons ---
 
-    // Function to generate simple placeholder data based on range
+// Function to generate simple placeholder data based on range
     function getPlaceholderChartData(range) {
-        // Basic example: slightly change labels and data points
-        let labels = [...mainChartData.labels]; // Copy original labels
-        let dataPoints = [...mainChartData.datasets[0].data]; // Copy original data
+        // --- START: Correction ---
+        // Always get a fresh copy of the original data *inside* the function
+        const originalLabels = [...mainChartData.labels];
+        const originalDataPoints = [...mainChartData.datasets[0].data];
+        let newLabels = originalLabels; // Default to original
+        let newDataPoints = originalDataPoints; // Default to original
+        // --- END: Correction ---
+
+        console.log(`Generating data for range: ${range}. Original length: ${originalDataPoints.length}`); // Debug log
 
         if (range === "1d") {
-            labels = ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm"];
-            dataPoints = dataPoints.map(p => p + (Math.random() * 10 - 5)).slice(0, 8); // Modify slightly
+            newLabels = ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm"];
+            // Use original data points for calculation, then slice
+            newDataPoints = originalDataPoints.map(p => p + (Math.random() * 10 - 5)).slice(0, 8);
         } else if (range === "5d") {
-            labels = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-            dataPoints = dataPoints.map(p => p + (Math.random() * 20 - 10)).slice(0, 5);
+            newLabels = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+            // Use original data points for calculation, then slice
+            newDataPoints = originalDataPoints.map(p => p + (Math.random() * 20 - 10)).slice(0, 5);
         } else if (range === "1m") {
-            labels = ["Week 1", "Week 2", "Week 3", "Week 4"];
-            dataPoints = dataPoints.map(p => p + (Math.random() * 50 - 25)).slice(0, 4);
+            newLabels = ["Week 1", "Week 2", "Week 3", "Week 4"];
+             // Use original data points for calculation, then slice
+            newDataPoints = originalDataPoints.map(p => p + (Math.random() * 50 - 25)).slice(0, 4);
         }
-        // Add more conditions for other ranges (6m, YTD, 1y, 5y, Max)
-        // For "Max" or others, you might just return the original data
+        // Add more specific ranges if needed (6m, YTD, 1y, 5y, Max)
+        // Example for Max - just use original
+        else if (range === "Max") {
+             newLabels = originalLabels;
+             newDataPoints = originalDataPoints;
+        }
+         // Example for 1y (if original data has enough points)
+         else if (range === "1y" && originalDataPoints.length >= 12) {
+             newLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+             newDataPoints = originalDataPoints.slice(-12); // Take last 12 points
+         }
+        // Default/Fallback - just return the original data as is
+        // Removed the random slicing 'else' block which caused issues
         else {
-             // Default: return original data slightly modified
-             labels = labels.slice(0, Math.max(2, labels.length - Math.floor(Math.random() * 3))); // Remove some labels
-             dataPoints = dataPoints.slice(0, labels.length); // Match data length
+             newLabels = originalLabels;
+             newDataPoints = originalDataPoints;
         }
 
+         // Ensure labels and data arrays have same length for Chart.js
+        const finalLength = Math.min(newLabels.length, newDataPoints.length);
+        newLabels = newLabels.slice(0, finalLength);
+        newDataPoints = newDataPoints.slice(0, finalLength);
+
+        console.log(`Generated ${newDataPoints.length} data points.`); // Debug log
+
         return {
-            labels: labels,
+            labels: newLabels,
             datasets: [{
                 ...mainChartData.datasets[0], // Keep original styling etc.
                 label: `S&P 500 Value (${range})`, // Update label
-                data: dataPoints // Use new data points
+                data: newDataPoints // Use new data points
             }]
         };
     }
