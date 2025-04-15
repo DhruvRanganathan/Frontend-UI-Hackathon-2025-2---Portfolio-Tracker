@@ -661,5 +661,34 @@ h2 {
     /* Styling for the text part */
 }
 
+/* ============================================ */
+/* === Chart Container & Canvas Fix Styling === */
+/* ============================================ */
+
+.main-chart-area {
+    /* Existing styles: background, padding, border-radius, flex, gap */
+    display: flex;
+    flex-direction: column;
+    /* Ensure the container itself doesn't grow infinitely if flex basis isn't respected */
+    overflow: hidden; /* Add overflow hidden */
+    position: relative; /* Needed for absolute positioning if used inside, good practice */
+}
+
+/* New wrapper div */
+.chart-canvas-container {
+    flex-grow: 1; /* Allow this container to take available vertical space */
+    position: relative; /* Crucial for Chart.js responsiveness sizing */
+    /* You might need to explicitly set a height/min-height here if flex-grow isn't enough */
+    min-height: 250px; /* Or inherit from parent if possible */
+}
+
+#portfolioChart {
+    /* Remove positioning/sizing rules that might conflict */
+    /* Remove flex-grow, flex-shrink, min-height from here */
+    max-width: 100%;
+    /* Chart.js will handle sizing relative to the wrapper */
+}
+
+
 
 
