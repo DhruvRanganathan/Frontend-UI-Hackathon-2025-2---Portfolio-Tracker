@@ -1,4 +1,6 @@
 // Wait for the HTML document to fully load before running scripts
+console.log("STARTING script.js file!");
+
 document.addEventListener('DOMContentLoaded', function() {
 
    /* // --- Populate "Your Stock Portfolio" Row ---
