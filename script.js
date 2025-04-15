@@ -199,7 +199,77 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     // === END: New Code for Sidebar & Details ===
     // ==========================================
+// Wait for the HTML document to fully load before running scripts
+document.addEventListener('DOMContentLoaded', function() {
 
+    // --- Populate "Your Stock Portfolio" Row ---
+    // ... (existing code) ...
+
+    // --- Initialize Main Chart ---
+    // ... (existing code - NOTE: store chart instance in a variable) ...
+    let portfolioLineChart = null; // Variable to hold the chart instance
+    const ctx = document.getElementById('portfolioChart');
+    if (ctx && mainChartData) {
+       portfolioLineChart = new Chart(ctx, { // Assign to variable
+            type: 'line',
+            data: mainChartData,
+            options: { /* ... chart options ... */ }
+        });
+    } else { /* console.error(...) */ }
+
+
+    // --- Populate Sidebar Watchlist ---
+    // ... (existing code) ...
+
+    // --- Populate Details Panel ---
+    // ... (existing code) ...
+
+
+    // ===============================================
+    // === START: New Code for Time Range Buttons ===
+    // ===============================================
+
+    const timeRangeButtons = document.querySelectorAll('.chart-time-ranges .time-range-btn');
+
+    timeRangeButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent potential default button behavior
+
+            // Get the selected time range (e.g., "1d", "5d")
+            const selectedRange = this.textContent.trim(); // 'this' refers to the clicked button
+
+            // Remove 'active' class from all buttons
+            timeRangeButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Add 'active' class to the clicked button
+            this.classList.add('active');
+
+            // Log the selected range to the console (for testing)
+            console.log("Selected time range:", selectedRange);
+
+            // --- TODO: Update Chart Data ---
+            // Here you would typically:
+            // 1. Fetch new data based on the selectedRange (or filter existing data).
+            // 2. Update the 'labels' and 'data' within the chart's data object.
+            // 3. Call portfolioLineChart.update(); to redraw the chart.
+            // Example (using placeholder data - replace with actual logic):
+            // const newData = getNewChartDataForRange(selectedRange); // Imaginary function
+            // if (portfolioLineChart && newData) {
+            //    portfolioLineChart.data.labels = newData.labels;
+            //    portfolioLineChart.data.datasets[0].data = newData.datasets[0].data;
+            //    portfolioLineChart.update();
+            // }
+
+        });
+    });
+
+    // ===============================================
+    // === END: New Code for Time Range Buttons ===
+    // ===============================================
+
+    
 
 }); // End of DOMContentLoaded listener
 
