@@ -98,3 +98,202 @@ h2 {
 .sidebar p, .top-bar p, .stock-portfolio-row p, .main-chart-area p, .details-panel p {
     color: inherit; /* Use default text color instead of gray */
 }
+
+/* ============================ */
+/* === Top Bar Styling === */
+/* ============================ */
+
+.top-bar {
+    /* Existing styles: height, background, padding, border, etc. */
+    /* Add flexbox to position items inside */
+    display: flex;
+    justify-content: space-between; /* Pushes search to left, profile to right */
+    align-items: center;
+}
+
+/* --- Search Bar --- */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f4f7fa; /* Light gray background */
+    padding: 8px 15px;
+    border-radius: 20px; /* Rounded corners */
+    width: 300px; /* Adjust width as needed */
+}
+
+.search-icon {
+    color: #aaa; /* Light gray icon color */
+    margin-right: 10px;
+}
+
+.search-bar input[type="text"] {
+    border: none; /* Remove default border */
+    outline: none; /* Remove focus outline */
+    background-color: transparent; /* Match parent background */
+    width: 100%; /* Take remaining space */
+    font-size: 0.9em;
+}
+
+.search-bar input[type="text"]::placeholder {
+    color: #aaa; /* Placeholder text color */
+}
+
+
+/* --- User Profile --- */
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 36px; /* Adjust size as needed */
+    height: 36px;
+    border-radius: 50%; /* Make it circular */
+    margin-right: 10px;
+    /* Add a placeholder background color if src is empty */
+    background-color: #ddd;
+    /* In a real app, src would point to the image file */
+    /* src: placeholder-avatar.png */
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2; /* Adjust line spacing */
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.user-email {
+    font-size: 0.8em;
+    color: #777;
+}
+
+/* ================================= */
+/* === Stock Portfolio Row Styling === */
+/* ================================= */
+
+.stock-portfolio-row h2 {
+ /* You might want specific styling for section titles later */
+}
+
+.cards-container {
+    display: flex; /* Lay out cards horizontally */
+    gap: 20px; /* Space between cards */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    padding-bottom: 15px; /* Add some padding for scrollbar or just spacing */
+
+    /* Optional: Hide scrollbar for cleaner look (might need vendor prefixes) */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+/* Optional: Hide scrollbar for Chrome, Safari, Opera */
+.cards-container::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* --- Stock Card --- */
+.stock-card {
+    background-color: #ffffff; /* Already set by section, but good to be explicit */
+    border: 1px solid #e0e0e0; /* Match subtle border style */
+    border-radius: 8px; /* Match other sections */
+    padding: 15px;
+    min-width: 220px; /* Minimum width for each card */
+    flex-shrink: 0; /* Prevent cards from shrinking */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes top/bottom apart */
+    transition: box-shadow 0.2s ease-in-out; /* Add hover effect later */
+}
+
+.stock-card:hover {
+    /* Add a subtle shadow on hover later if desired */
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); */
+}
+
+.card-top, .card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-top {
+    margin-bottom: 15px; /* Space between top and bottom sections */
+}
+
+.stock-info {
+    display: flex;
+    align-items: center;
+}
+
+.stock-logo {
+    width: 24px; /* Adjust size */
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 8px;
+    background-color: #eee; /* Placeholder background */
+}
+
+.stock-name {
+    font-size: 0.9em;
+    font-weight: 500; /* Medium weight */
+    color: #333;
+}
+
+.stock-ticker-perf {
+    text-align: right;
+}
+
+.stock-ticker {
+    font-size: 0.8em;
+    color: #777;
+    display: block; /* Put ticker above percentage */
+}
+
+.stock-perf {
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.stock-perf.positive {
+    color: #28a745; /* Green for positive */
+}
+
+.stock-perf.negative {
+    color: #dc3545; /* Red for negative */
+}
+
+.card-bottom {
+    align-items: flex-end; /* Align items to bottom */
+}
+
+.portfolio-value {
+    line-height: 1.2;
+}
+
+.portfolio-label {
+    font-size: 0.75em;
+    color: #777;
+    display: block;
+}
+
+.portfolio-amount {
+    font-size: 1em;
+    font-weight: bold;
+    color: #333;
+}
+
+.mini-chart {
+    width: 60px; /* Adjust size */
+    height: 30px;
+    /* Add background/styles for placeholder or actual chart later */
+    background-color: #f0f0f0; /* Placeholder background */
+    border-radius: 3px;
+}
+
+
