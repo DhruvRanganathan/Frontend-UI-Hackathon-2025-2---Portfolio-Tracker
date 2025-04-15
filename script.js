@@ -1,7 +1,7 @@
 // Wait for the HTML document to fully load before running scripts
 document.addEventListener('DOMContentLoaded', function() {
 
-    // --- Populate "Your Stock Portfolio" Row ---
+   /* // --- Populate "Your Stock Portfolio" Row ---
 
     const cardsContainer = document.querySelector('.cards-container');
 
@@ -46,9 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     } else {
         console.error("Could not find portfolio stocks data or cards container element.");
-    }
+    }*/
 
-    // --- Initialize Main Chart ---
+    /*// --- Initialize Main Chart ---
     let portfolioLineChart = null; // Variable to hold the chart instance
     const ctx = document.getElementById('portfolioChart');
 
@@ -78,9 +78,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     } else {
          console.error("Could not find chart canvas element or main chart data.");
-    }
+    }*/
 
-    // --- Populate Sidebar Watchlist ---
+    /*// --- Populate Sidebar Watchlist ---
 
     const watchlistContainer = document.querySelector('.sidebar-watchlist');
 
@@ -105,10 +105,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     } else {
         console.error("Could not find sidebar watchlist data or container element.");
-    }
+    }*/
 
 
-    // --- Populate Details Panel ---
+    /*// --- Populate Details Panel ---
 
     const sp500DetailsContainer = document.querySelector('.sp500-details .details-card-body');
     const marketCapValueElement = document.querySelector('.market-cap-summary .market-cap-value');
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateDetailsPanel(detailsData);
     } else {
          console.error("Could not find details panel data.");
-    }
+    }*/
 
     // --- Add Event Listeners for Time Range Buttons ---
 
