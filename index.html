@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Portfolio Dashboard</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Portfolio Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
@@ -16,17 +26,49 @@
         <main class="main-content">
 
             <header class="top-bar">
-                <p>Top Bar (Search, User Profile)</p> </header>
+                <div class="search-bar">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="Search for stocks & more">
+                </div>
+                <div class="user-profile">
+                    <img src="placeholder-avatar.png" alt="User Avatar" class="avatar">
+                    <div class="user-details">
+                        <span class="user-name">Dhruv</span>
+                        <span class="user-email">Dhruv.investing@gmai...</span>
+                    </div>
+                </div>
+            </header>
 
             <div class="dashboard-grid">
 
                 <section class="stock-portfolio-row">
                     <h2>Your Stock Portfolio</h2>
-                    <p>Stock cards row...</p> </section>
+                    <div class="cards-container">
+                        <div class="stock-card">
+                            <div class="card-top">
+                                <div class="stock-info">
+                                    <img src="placeholder-logo.png" alt="Stock Logo" class="stock-logo"> <span class="stock-name">Apple, Inc</span>
+                                </div>
+                                <div class="stock-ticker-perf">
+                                    <span class="stock-ticker">AAPL</span>
+                                    <span class="stock-perf positive">+0.66%</span> </div>
+                            </div>
+                            <div class="card-bottom">
+                                <div class="portfolio-value">
+                                    <span class="portfolio-label">Portfolio</span>
+                                    <span class="portfolio-amount">15,215.70</span>
+                                </div>
+                                <div class="mini-chart">
+                                    </div>
+                            </div>
+                        </div>
+                        </div>
+                    </section>
 
                 <section class="main-chart-area">
-                    <h2>Stock Portfolio Performance</h2>
-                    <p>Main chart area...</p> <canvas id="portfolioChart"></canvas> </section>
+                    <h2>Stock Watchlists</h2>
+                    <p>Main chart area...</p> <canvas id="portfolioChart"></canvas>
+                </section>
 
                 <aside class="details-panel">
                     <h2>Details</h2>
