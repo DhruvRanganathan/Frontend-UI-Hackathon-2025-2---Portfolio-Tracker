@@ -68,7 +68,16 @@
             <div class="dashboard-grid">
 
                 <section class="stock-portfolio-row">
-                    <h2>Your Stock Portfolio</h2>
+                    <div class="section-header"> <h2>Your Stock Portfolio</h2>
+                        <div class="scroll-buttons">
+                             <button id="scroll-left-btn" class="scroll-arrow left" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button id="scroll-right-btn" class="scroll-arrow right">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
                     <div class="cards-container">
                         </div>
                 </section>
@@ -86,7 +95,6 @@
                             <button class="time-range-btn">1d</button> <button class="time-range-btn">5d</button>
                             <button class="time-range-btn">1m</button>
                             <button class="time-range-btn">6m</button>
-                            <button class="time-range-btn">YTD</button>
                             <button class="time-range-btn">1y</button>
                             <button class="time-range-btn">5y</button>
                             <button class="time-range-btn">Max</button>
