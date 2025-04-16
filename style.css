@@ -896,6 +896,525 @@ h2 {
     /* Styling set in JS */
 }
 
+/* ============================ */
+/* === Base & Layout Styling === */
+/* ============================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    /* Use Inter font */
+    font-family: 'Inter', sans-serif;
+    /* Light background for the page */
+    background-color: #f4f7fa;
+    /* Default text color */
+    color: #333;
+    /* Base font size - adjust if needed */
+    font-size: 14px;
+    /* Default line height */
+    line-height: 1.5;
+}
+
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 240px 1fr; /* Fixed sidebar, flexible main */
+    grid-template-rows: 1fr; /* Full height row */
+    height: 100vh; /* Full viewport height */
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column; /* Stack top-bar and grid vertically */
+    overflow-y: auto; /* Allow main content to scroll if needed */
+}
+
+.dashboard-grid {
+    padding: 30px; /* Consistent padding */
+    flex-grow: 1; /* Take remaining vertical space */
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Main area takes 2/3, details 1/3 */
+    grid-template-rows: auto 1fr; /* Portfolio row auto height, chart takes rest */
+    gap: 30px; /* Consistent gap */
+    grid-template-areas:
+        "portfolio-row details" /* Area names for clarity */
+        "main-chart    details";
+}
+
+h2 {
+    margin-bottom: 15px;
+    font-size: 1.15em; /* Slightly smaller heading */
+    font-weight: 500; /* Medium weight */
+    color: #111; /* Darker heading color */
+}
+
+/* ================================= */
+/* === Stock Portfolio Row Styling === */
+/* ================================= */
+.stock-portfolio-row {
+    position: relative; /* Needed for absolute positioning of scroll buttons */
+    padding: 20px; /* Consistent padding */
+    background-color: #ffffff;
+    border-radius: 8px;
+    grid-area: portfolio-row; /* Place in grid */
+    border: 1px solid #e0e0e0; /* Subtle border */
+    overflow: hidden; /* Hide anything extending beyond padding */
+}
+.stock-portfolio-row .section-header {
+    display: flex;
+    justify-content: space-between; /* Title left, buttons right */
+    align-items: center;
+    margin-bottom: 20px; /* Increased space */
+}
+.stock-portfolio-row h2 {
+    margin-bottom: 0; /* Remove default margin */
+}
+.cards-container {
+    display: flex; /* Lay out cards horizontally */
+    gap: 20px; /* Space between cards (Matches JS) */
+    overflow: hidden; /* Hide overflowing cards */
+    scroll-behavior: smooth; /* Animate scrolling */
+    /* Calculate max-width: (4 cards * card_width) + (3 gaps * gap_width) */
+    /* Using cardWidth=220, gap=20 from JS: (4 * 220) + (3 * 20) = 880 + 60 = 940 */
+    max-width: 940px; /* Max width for 4 cards + 3 gaps */
+    /* margin: 0 auto; */ /* Uncomment to center if container is narrower than grid area */
+}
+.stock-card {
+    background-color: #ffffff;
+    border: 1px solid #e8e8e8; /* Lighter border */
+    border-radius: 8px;
+    padding: 15px;
+    min-width: 220px; /* Fixed width (Matches JS) */
+    width: 220px;     /* Fixed width (Matches JS) */
+    flex-shrink: 0; /* Prevent cards from shrinking */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space out top and bottom */
+    transition: box-shadow 0.2s ease-in-out; /* Subtle hover effect */
+}
+.stock-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Add shadow on hover */
+}
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.stock-info {
+    display: flex;
+    align-items: center;
+}
+.stock-logo {
+    width: 28px; /* Logo size */
+    height: 28px;
+    border-radius: 50%; /* Circular logo */
+    margin-right: 10px;
+    background-color: #eee; /* Placeholder background */
+    /* Add styles for actual image if using src */
+    object-fit: contain;
+}
+.stock-name {
+    font-size: 0.9em;
+    font-weight: 500; /* Medium weight */
+    color: #333;
+}
+.stock-ticker-perf {
+    text-align: right;
+}
+.stock-ticker {
+    font-size: 0.8em;
+    color: #777;
+    display: block; /* Ticker above percentage */
+}
+.stock-perf {
+    font-size: 0.9em;
+    font-weight: 500;
+}
+.stock-perf.positive { color: #28a745; /* Green */ }
+.stock-perf.negative { color: #dc3545; /* Red */ }
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; /* Align items to bottom */
+}
+.portfolio-value {
+    line-height: 1.2;
+}
+.portfolio-label {
+    font-size: 0.75em;
+    color: #777;
+    display: block;
+}
+.portfolio-amount {
+    font-size: 1em;
+    font-weight: 700; /* Bolder amount */
+    color: #333;
+}
+.scroll-buttons {
+    display: flex;
+    gap: 5px; /* Space between arrow buttons */
+}
+.scroll-arrow {
+    background-color: #f0f0f0; /* Lighter arrows */
+    border: none;
+    color: #666;
+    border-radius: 50%; /* Circular buttons */
+    width: 28px;
+    height: 28px;
+    font-size: 0.8em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.scroll-arrow:hover {
+    background-color: #e0e0e0; /* Darker on hover */
+    color: #000;
+}
+.scroll-arrow:disabled {
+    background-color: #f8f8f8; /* Very light when disabled */
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+/* ============================ */
+/* === Mini Chart Styling === */
+/* ============================ */
+.mini-chart {
+    width: 60px; /* SVG width */
+    height: 30px; /* SVG height */
+    display: inline-block;
+    vertical-align: bottom; /* Align better with text */
+    line-height: 0; /* Prevent extra space */
+}
+.mini-chart svg {
+    display: block; /* Prevent extra space */
+    width: 100%;
+    height: 100%;
+}
+.mini-chart svg polyline {
+    /* Styling (stroke, stroke-width, fill) set dynamically in JS */
+}
+
+/* ============================================ */
+/* === Chart Container & Canvas Styling === */
+/* ============================================ */
+.main-chart-area {
+    display: flex;
+    flex-direction: column; /* Stack header, chart, footer */
+    overflow: hidden; /* Prevent content spill */
+    position: relative;
+    background-color: #ffffff;
+    padding: 20px; /* Consistent padding */
+    border-radius: 8px;
+    grid-area: main-chart; /* Place in grid */
+    border: 1px solid #e0e0e0; /* Subtle border */
+}
+.chart-canvas-container {
+    flex-grow: 1; /* Allow container to take available vertical space */
+    position: relative; /* Needed for Chart.js responsiveness */
+    min-height: 250px; /* Ensure minimum drawing space */
+}
+#portfolioChart {
+    /* Canvas should fill its container */
+     max-width: 100%;
+}
+
+/* ================================= */
+/* === Main Chart Area Styling === */
+/* ================================= */
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to top */
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 10px; /* Add gap for wrapping */
+}
+.chart-title-info span {
+    margin-right: 10px; /* Reduced space */
+    display: inline-block; /* Needed for margin */
+    vertical-align: bottom; /* Align text better */
+}
+.chart-stock-name {
+    font-size: 1.1em;
+    font-weight: 700; /* Bold name */
+    color: #111;
+}
+.chart-stock-value {
+    font-size: 1.1em;
+    font-weight: 500; /* Medium value */
+    color: #333;
+}
+.chart-stock-perf {
+    font-size: 1em;
+    font-weight: 500;
+}
+.chart-stock-perf.positive { color: #28a745; }
+.chart-stock-perf.negative { color: #dc3545; }
+.chart-stock-change {
+    font-size: 0.9em;
+    color: #777;
+}
+.chart-stock-change.positive { color: #28a745; }
+.chart-stock-change.negative { color: #dc3545; }
+.chart-time-ranges {
+    background-color: #f0f0f0; /* Button group background */
+    border-radius: 6px;
+    padding: 3px;
+    display: inline-flex; /* Shrink to content */
+}
+.time-range-btn {
+    background-color: transparent;
+    border: none;
+    padding: 5px 10px;
+    margin: 0 2px; /* Small space between buttons */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    color: #555;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.time-range-btn:hover {
+    background-color: #e0e0e0;
+}
+.time-range-btn.active {
+    background-color: #ffffff; /* White active button */
+    color: #333;
+    font-weight: 500; /* Medium weight active */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+.chart-footer {
+    margin-top: 10px;
+    text-align: right;
+}
+.prev-close-label {
+    font-size: 0.8em;
+    color: #777;
+}
+
+/* ============================ */
+/* === Details Panel Styling === */
+/* ============================ */
+.details-panel {
+    display: flex;
+    flex-direction: column; /* Stack cards vertically */
+    gap: 20px; /* Space between cards */
+    background-color: #ffffff;
+    padding: 20px; /* Consistent padding */
+    border-radius: 8px;
+    grid-area: details; /* Place in grid */
+    border: 1px solid #e0e0e0; /* Subtle border */
+}
+.details-panel h2 {
+    margin-bottom: 0; /* Remove margin as cards have padding */
+}
+.details-card {
+    /* Common styles for cards in details panel */
+    background-color: #ffffff;
+    border: 1px solid #e8e8e8; /* Lighter border */
+    border-radius: 8px;
+    padding: 15px;
+}
+.sp500-details .details-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0; /* Light border */
+}
+.details-title {
+    font-weight: 500; /* Medium weight title */
+    font-size: 1em;
+}
+.details-time-filter {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0; /* Match chart time range bg */
+    border-radius: 6px;
+    padding: 5px 8px;
+    font-size: 0.8em;
+    color: #555;
+    cursor: pointer;
+}
+.details-time-filter i {
+    margin: 0 3px; /* Space around icons */
+    font-size: 0.9em;
+}
+.details-card-body { /* Container for key-value pairs */ }
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0; /* Vertical padding */
+    font-size: 0.85em; /* Slightly smaller text */
+    border-bottom: 1px solid #f9f9f9; /* Very light border */
+}
+.detail-item:last-child {
+    border-bottom: none; /* Remove border on last item */
+}
+.detail-key {
+    color: #666; /* Slightly darker key */
+}
+.detail-value {
+    color: #333;
+    font-weight: 500; /* Medium weight value */
+}
+.market-cap-summary {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px; /* Adjusted padding */
+    background-color: #f8f8f8; /* Light background */
+    /* Inherits border/radius from .details-card */
+}
+.market-cap-icon {
+    font-size: 1.1em; /* Adjusted icon size */
+    color: #666;
+    margin-right: 10px;
+    width: 20px; /* Give icon fixed width */
+    text-align: center;
+}
+.market-cap-label {
+    color: #555;
+    font-size: 0.9em;
+    margin-right: auto; /* Push value to the right */
+}
+.market-cap-value {
+    color: #333;
+    font-weight: 500; /* Medium weight */
+    font-size: 0.95em;
+}
+
+/* ============================ */
+/* === Sidebar Styling === */
+/* ============================ */
+.sidebar {
+    display: flex;
+    flex-direction: column; /* Stack sections vertically */
+    gap: 25px; /* Space between sections */
+    background-color: #ffffff;
+    padding: 20px;
+    border-right: 1px solid #e0e0e0;
+}
+.sidebar-header {
+    padding-top: 10px;
+    text-align: center;
+    margin-bottom: 10px; /* Added margin */
+}
+.sidebar-title {
+    font-size: 1.2em; /* Adjusted size */
+    font-weight: 700; /* Bold title */
+    color: #111;
+}
+.sidebar-watchlist { /* Container for watchlist items */ }
+.watchlist-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s ease;
+    border: 1px solid #eee; /* Added subtle border */
+}
+.watchlist-item:hover {
+    background-color: #f5f5f5; /* Lighter hover */
+}
+.watchlist-ticker {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #333;
+}
+.watchlist-details { text-align: right; }
+.watchlist-value { font-size: 0.9em; color: #555; display: block; }
+.watchlist-change { font-size: 0.8em; font-weight: 500; }
+.watchlist-change.positive { color: #28a745; }
+.watchlist-change.negative { color: #dc3545; }
+.sidebar-menu {
+    margin-top: 10px;
+    flex-grow: 1; /* Allow menu to take remaining space */
+}
+.menu-title {
+    font-size: 0.7em; /* Smaller title */
+    font-weight: 700; /* Bold */
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.8px; /* Increased spacing */
+    margin-bottom: 10px;
+    padding: 0 10px; /* Align with menu item padding */
+}
+.sidebar-menu ul { list-style: none; padding: 0; margin: 0; }
+.sidebar-menu li { margin-bottom: 5px; }
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #555; /* Default menu item color */
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-size: 0.9em; /* Adjusted size */
+    font-weight: 500; /* Medium weight */
+}
+.menu-item:hover {
+    background-color: #f0f0f0; /* Light background on hover */
+    color: #222;
+}
+.menu-item.active {
+    background-color: #e8e8e8; /* Lighter active background */
+    color: #111; /* Darker active text */
+    font-weight: 500;
+}
+.menu-icon {
+    width: 20px; /* Fixed width for icon alignment */
+    text-align: center;
+    margin-right: 12px; /* Increased space */
+    font-size: 1em; /* Adjusted icon size */
+    color: #888; /* Default icon color */
+}
+.menu-item:hover .menu-icon,
+.menu-item.active .menu-icon {
+    color: #111; /* Darker icon on hover/active */
+}
+
+/* ============================ */
+/* === Top Bar Styling === */
+/* ============================ */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px 30px; /* Adjusted padding */
+    border-bottom: 1px solid #e0e0e0;
+    height: 60px; /* Adjusted height */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f4f7fa; /* Match page background */
+    padding: 8px 15px;
+    border-radius: 6px; /* Less round */
+    width: 350px; /* Wider */
+    border: 1px solid #e8e8e8; /* Subtle border */
+}
+.search-icon { color: #aaa; margin-right: 10px; }
+.search-bar input[type="text"] { border: none; outline: none; background-color: transparent; width: 100%; font-size: 0.9em; }
+.search-bar input[type="text"]::placeholder { color: #aaa; }
+.user-profile { display: flex; align-items: center; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; margin-right: 10px; background-color: #ddd; /* Placeholder */ }
+.user-details { display: flex; flex-direction: column; line-height: 1.3; /* Adjusted spacing */ }
+.user-name { font-weight: 500; font-size: 0.9em; color: #333; }
+.user-email { font-size: 0.75em; color: #777; }
+
 
 
 

@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateChartHeaderPerformance(range) { /* ... */ if (typeof sp500Performance === 'undefined' || !sp500Performance[range] || !chartStockPerfElement || !chartStockChangeElement) { console.error("Missing performance data or header elements for range:", range); if(chartStockPerfElement) chartStockPerfElement.textContent = '-'; if(chartStockChangeElement) chartStockChangeElement.textContent = '-'; return; } const perfData = sp500Performance[range]; const perfClass = perfData.percent >= 0 ? 'positive' : 'negative'; const sign = perfData.percent >= 0 ? '+' : ''; chartStockPerfElement.textContent = `${sign}${perfData.percent.toFixed(2)}%`; chartStockPerfElement.className = `chart-stock-perf ${perfClass}`; chartStockChangeElement.textContent = `(${sign}${perfData.absolute.toFixed(2)} ${perfData.labelSuffix})`; chartStockChangeElement.className = `chart-stock-change ${perfClass}`; }
     function renderMiniChartSVG(containerId, data, isPositive) { /* ... */ const container = document.getElementById(containerId); if (!container || !data || data.length < 2) { if(container) container.innerHTML = ''; return; } const svgWidth = 60; const svgHeight = 30; const padding = 2; const dataMin = Math.min(...data); const dataMax = Math.max(...data); const dataRange = dataMax - dataMin; const effectiveRange = dataRange === 0 ? 1 : dataRange; const points = data.map((d, index) => { const x = padding + index * (svgWidth - 2 * padding) / (data.length - 1); const y = (svgHeight - padding) - (d - dataMin) / effectiveRange * (svgHeight - 2 * padding); return `${x.toFixed(1)},${y.toFixed(1)}`; }).join(' '); const strokeColor = isPositive ? '#28a745' : '#dc3545'; const svgMarkup = ` <svg width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"> <polyline points="${points}" fill="none" stroke="${strokeColor}" stroke-width="1.5"/> </svg> `; container.innerHTML = svgMarkup; }
 
-    // === NEW: Debounce Function ===
+    // === RE-ADD: Debounce Function ===
     /**
      * Creates a debounced function that delays invoking func until after wait milliseconds
      * have elapsed since the last time the debounced function was invoked.
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
             timeout = setTimeout(later, wait);
         };
     }
-    // === END NEW Debounce Function ===
+    // === END RE-ADD Debounce Function ===
 
 
     // --- Initial Page Load Population ---
@@ -54,8 +54,31 @@ document.addEventListener('DOMContentLoaded', function() {
     let portfolioLineChart = null;
     const initialChartRange = "1d";
     const initialChartData = getChartDataForRange(initialChartRange);
+
     if (chartCanvas && initialChartData && initialChartData.datasets && initialChartData.datasets[0].data && initialChartData.datasets[0].data.length > 0) {
-       try { /* ... calculate initial min/max ... */ const initialDataPoints = initialChartData.datasets[0].data; const initialDataMin = Math.min(...initialDataPoints); const initialDataMax = Math.max(...initialDataPoints); const initialPadding = (initialDataMax - initialDataMin) === 0 ? 5 : (initialDataMax - initialDataMin) * 0.1; const initialAxisMin = Math.floor(Math.max(0, initialDataMin - initialPadding)); const initialAxisMax = Math.ceil(initialDataMax + initialPadding); portfolioLineChart = new Chart(chartCanvas, { type: 'line', data: initialChartData, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: false, min: initialAxisMin, max: initialAxisMax } } } }); updateChartHeaderPerformance(initialChartRange); } catch (error) { console.error("Error initializing main chart:", error); }
+       try {
+           const initialDataPoints = initialChartData.datasets[0].data;
+           const initialDataMin = Math.min(...initialDataPoints);
+           const initialDataMax = Math.max(...initialDataPoints);
+           const initialPadding = (initialDataMax - initialDataMin) === 0 ? 5 : (initialDataMax - initialDataMin) * 0.1;
+           const initialAxisMin = Math.floor(Math.max(0, initialDataMin - initialPadding));
+           const initialAxisMax = Math.ceil(initialDataMax + initialPadding);
+
+           portfolioLineChart = new Chart(chartCanvas, {
+                type: 'line',
+                data: initialChartData,
+                options: {
+                    // === START: Re-enable Responsiveness ===
+                    responsive: true, // Set back to true
+                    maintainAspectRatio: false, // Keep as false for flexible height
+                    // === END: Re-enable Responsiveness ===
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: false, min: initialAxisMin, max: initialAxisMax } }
+                }
+            });
+           updateChartHeaderPerformance(initialChartRange);
+
+        } catch (error) { console.error("Error initializing main chart:", error); }
     } else { console.error("Could not find chart canvas element or valid initial chart data."); }
 
 
@@ -69,20 +92,22 @@ document.addEventListener('DOMContentLoaded', function() {
     if (cardsContainer && scrollLeftBtn && scrollRightBtn && typeof portfolioStocks !== 'undefined') { const cardWidth = 220; const gap = 20; const scrollAmount = cardWidth + gap; function updateScrollButtons() { const tolerance = 1; const maxScrollLeft = cardsContainer.scrollWidth - cardsContainer.clientWidth; scrollLeftBtn.disabled = cardsContainer.scrollLeft <= tolerance; scrollRightBtn.disabled = cardsContainer.scrollLeft >= maxScrollLeft - tolerance; console.log(`ScrollLeft: ${cardsContainer.scrollLeft.toFixed(1)}, MaxScroll: ${maxScrollLeft.toFixed(1)}, Right Disabled: ${scrollRightBtn.disabled}`); } setTimeout(updateScrollButtons, 150); scrollRightBtn.addEventListener('click', () => { cardsContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' }); setTimeout(updateScrollButtons, 400); }); scrollLeftBtn.addEventListener('click', () => { cardsContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); setTimeout(updateScrollButtons, 400); }); let resizeTimeout; window.addEventListener('resize', () => { clearTimeout(resizeTimeout); resizeTimeout = setTimeout(updateScrollButtons, 250); }); } else { if (!cardsContainer) console.error("Scrolling Error: cardsContainer not found."); if (!scrollLeftBtn) console.error("Scrolling Error: scrollLeftBtn not found."); if (!scrollRightBtn) console.error("Scrolling Error: scrollRightBtn not found."); if (typeof portfolioStocks === 'undefined') console.error("Scrolling Error: portfolioStocks data not found."); }
 
 
-    // === NEW: Debounced Resize Handler for Main Chart ===
+    // === RE-ADD: Debounced Resize Handler for Main Chart ===
     const handleResize = debounce(() => {
         if (portfolioLineChart) {
             console.log("Window resized, calling chart.resize()");
-            portfolioLineChart.resize(); // Tell chart to resize to its container
+            // Chart.js resize() should be sufficient with responsive:true
+            // No need to manually recalculate scales here usually
+            portfolioLineChart.resize();
         }
-        // Also update scroll buttons on resize, as container width changes
-        if (typeof updateScrollButtons === 'function') { // Check if function exists
+        // Also update scroll buttons on resize
+        if (typeof updateScrollButtons === 'function') {
              updateScrollButtons();
         }
-    }, 250); // Debounce timeout in milliseconds (adjust as needed)
+    }, 250); // 250ms delay
 
     window.addEventListener('resize', handleResize);
-    // === END NEW Resize Handler ===
+    // === END RE-ADD Resize Handler ===
 
 
 }); // End of DOMContentLoaded listener
