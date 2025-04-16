@@ -69,3 +69,4 @@ const chartData_NYSE_6m = { labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"], 
 const chartData_NYSE_1y = { labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr"], datasets: [{ label: 'NYSE Value (1y)', data: [15000, 15200, 15500, 15800, 15600, 15400, 16000, 16500, 16800, 17000, 17100, 17821], ...baseDatasetOptionsNYSE }] };
 const chartData_NYSE_5y = { labels: ["Yr 1", "Yr 2", "Yr 3", "Yr 4", "Yr 5"], datasets: [{ label: 'NYSE Value (5y)', data: [12000, 13000, 12500, 15000, 17821], ...baseDatasetOptionsNYSE }] };
 const chartData_NYSE_Max = { labels: ["Yr 1", "Yr 2", "Yr 3", "Yr 4", "Yr 5"], datasets: [{ label: 'NYSE Value (Max)', data: [12000, 13000, 12500, 15000, 17821], ...baseDatasetOptionsNYSE }] };
+

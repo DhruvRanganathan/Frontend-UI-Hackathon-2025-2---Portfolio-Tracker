@@ -13,36 +13,56 @@
 <body>
     <div class="dashboard-container">
         <aside class="sidebar">
-            <div class="sidebar-header"> <h1 class="sidebar-title">AI WATCHLIST</h1> </div> <div class="sidebar-watchlist"> <a href="#" class="watchlist-item"> <span class="watchlist-ticker">S&P 500</span> <div class="watchlist-details"> <span class="watchlist-value">4,543.76</span> <span class="watchlist-change positive">+0.30%</span> </div> </a> <a href="#" class="watchlist-item"> <span class="watchlist-ticker">NYSE</span> <div class="watchlist-details"> <span class="watchlist-value">4,543.76</span> <span class="watchlist-change positive">+1.11%</span> </div> </a> </div> <nav class="sidebar-menu"> <h3 class="menu-title">MAIN MENU</h3> <ul> <li> <a href="#" class="menu-item active"> <i class="fas fa-home menu-icon"></i> <span class="menu-text">Home</span> </a> </li> <li> <a href="#" class="menu-item"> <i class="fas fa-chart-pie menu-icon"></i> <span class="menu-text">Your Portfolio</span> </a> </li> </ul> </nav>
+            <div class="sidebar-header"> <h1 class="sidebar-title">AI WATCHLIST</h1> </div>
+            <div class="sidebar-watchlist">
+                <a href="#" class="watchlist-item" data-index="SP500">
+                    <span class="watchlist-ticker">S&P 500</span>
+                    <div class="watchlist-details">
+                        <span class="watchlist-value">5,405.97</span>
+                        <span class="watchlist-change positive">+0.79%</span>
+                    </div>
+                </a>
+                <a href="#" class="watchlist-item" data-index="NYSE">
+                    <span class="watchlist-ticker">NYSE</span>
+                    <div class="watchlist-details">
+                        <span class="watchlist-value">17,821.15</span>
+                        <span class="watchlist-change positive">+1.11%</span>
+                    </div>
+                </a>
+                 </div>
+             <nav class="sidebar-menu"> <h3 class="menu-title">MAIN MENU</h3> <ul> <li> <a href="#" class="menu-item active"> <i class="fas fa-home menu-icon"></i> <span class="menu-text">Home</span> </a> </li> <li> <a href="#" class="menu-item"> <i class="fas fa-chart-pie menu-icon"></i> <span class="menu-text">Your Portfolio</span> </a> </li> </ul> </nav>
         </aside>
 
         <main class="main-content">
             <header class="top-bar">
-                <div class="search-bar"> <i class="fas fa-search search-icon"></i> <input type="text" placeholder="Search for stocks & more"> </div> <div class="user-profile"> <div class="avatar"></div> <div class="user-details"> <span class="user-name">Dhruv</span> <span class="user-email">Dhruv.investing@gmai...</span> </div> </div>
+                 <div class="search-bar"> <i class="fas fa-search search-icon"></i> <input type="text" placeholder="Search for stocks & more"> </div> <div class="user-profile"> <div class="avatar"></div> <div class="user-details"> <span class="user-name">Dhruv</span> <span class="user-email">Dhruv.investing@gmai...</span> </div> </div>
             </header>
 
             <div class="dashboard-grid">
                 <section class="stock-portfolio-row">
-                    <div class="section-header"> <h2>Your Stock Portfolio</h2>
-                        <div class="scroll-buttons">
-                             <button id="scroll-left-btn" class="scroll-arrow left" disabled>
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <button id="scroll-right-btn" class="scroll-arrow right">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="cards-container">
-                        </div>
+                    <div class="section-header"> <h2>Your Stock Portfolio</h2> <div class="scroll-buttons"> <button id="scroll-left-btn" class="scroll-arrow left" disabled> <i class="fas fa-chevron-left"></i> </button> <button id="scroll-right-btn" class="scroll-arrow right"> <i class="fas fa-chevron-right"></i> </button> </div> </div>
+                    <div class="cards-container"> </div>
                 </section>
 
                 <section class="main-chart-area">
-                    <h2>Stock Watchlists</h2> <div class="chart-header"> <div class="chart-title-info"> <span class="chart-stock-name">S&P 500</span> <span class="chart-stock-value">5,405.97</span> <span class="chart-stock-perf positive">+0.79%</span> <span class="chart-stock-change positive">(+42.61 Today)</span> </div> <div class="chart-time-ranges"> <button class="time-range-btn">1d</button> <button class="time-range-btn">5d</button> <button class="time-range-btn">1m</button> <button class="time-range-btn">6m</button> <button class="time-range-btn">1y</button> <button class="time-range-btn">5y</button> <button class="time-range-btn">Max</button> </div> </div> <div class="chart-canvas-container"> <canvas id="portfolioChart"></canvas> </div> <div class="chart-footer"> <span class="prev-close-label">Prev Close 5,363.36</span> </div>
+                     <h2>Stock Watchlists</h2>
+                     <div class="chart-header">
+                         <div class="chart-title-info">
+                             <span class="chart-stock-name" id="chart-index-name">S&P 500</span>
+                             <span class="chart-stock-value" id="chart-index-value">5,405.97</span>
+                             <span class="chart-stock-perf positive">+0.79%</span>
+                             <span class="chart-stock-change positive">(+42.61 Today)</span>
+                         </div>
+                         <div class="chart-time-ranges"> <button class="time-range-btn">1d</button> <button class="time-range-btn">5d</button> <button class="time-range-btn">1m</button> <button class="time-range-btn">6m</button> <button class="time-range-btn">1y</button> <button class="time-range-btn">5y</button> <button class="time-range-btn">Max</button> </div>
+                     </div>
+                     <div class="chart-canvas-container"> <canvas id="portfolioChart"></canvas> </div>
+                     <div class="chart-footer"> <span class="prev-close-label">Prev Close 5,363.36</span> </div>
                 </section>
 
                 <aside class="details-panel">
-                    <h2>Details</h2> <div class="details-card sp500-details"> <div class="details-card-header"> <span class="details-title">S&P 500</span> <div class="details-time-filter"> <i class="far fa-clock"></i> <span>24 h</span> <i class="fas fa-chevron-down"></i> </div> </div> <div class="details-card-body"> <div class="detail-item"> <span class="detail-key">Previous Close</span> <span class="detail-value">5,363.36</span> </div> <div class="detail-item"> <span class="detail-key">Day Range</span> <span class="detail-value">5,358.02 - 5,459.46</span> </div> <div class="detail-item"> <span class="detail-key">Year Range</span> <span class="detail-value">4,835.04 - 6,147.43</span> </div> <div class="detail-item"> <span class="detail-key">Market Cap</span> <span class="detail-value">$40.3 T USD</span> </div> <div class="detail-item"> <span class="detail-key">Volume</span> <span class="detail-value">2,924,736</span> </div> <div class="detail-item"> <span class="detail-key">Dividend Yield</span> <span class="detail-value">1.43%</span> </div> <div class="detail-item"> <span class="detail-key">P/E Ratio</span> <span class="detail-value">31.08</span> </div> </div> </div> <div class="details-card market-cap-summary"> <i class="fas fa-building-columns market-cap-icon"></i> <span class="market-cap-label">Market Cap</span> <span class="market-cap-value">$49.8 T</span> </div>
+                     <h2>Details</h2>
+                     <div class="details-card sp500-details"> <div class="details-card-header"> <span class="details-title">S&P 500</span> <div class="details-time-filter"> <i class="far fa-clock"></i> <span>24 h</span> <i class="fas fa-chevron-down"></i> </div> </div> <div class="details-card-body"> <div class="detail-item"> <span class="detail-key">Previous Close</span> <span class="detail-value">5,363.36</span> </div> <div class="detail-item"> <span class="detail-key">Day Range</span> <span class="detail-value">5,358.02 - 5,459.46</span> </div> <div class="detail-item"> <span class="detail-key">Year Range</span> <span class="detail-value">4,835.04 - 6,147.43</span> </div> <div class="detail-item"> <span class="detail-key">Market Cap</span> <span class="detail-value">$40.3 T USD</span> </div> <div class="detail-item"> <span class="detail-key">Volume</span> <span class="detail-value">2,924,736</span> </div> <div class="detail-item"> <span class="detail-key">Dividend Yield</span> <span class="detail-value">1.43%</span> </div> <div class="detail-item"> <span class="detail-key">P/E Ratio</span> <span class="detail-value">31.08</span> </div> </div> </div>
+                     <div class="details-card market-cap-summary"> <i class="fas fa-building-columns market-cap-icon"></i> <span class="market-cap-label">Market Cap</span> <span class="market-cap-value">$49.8 T</span> </div>
                 </aside>
             </div>
         </main>
