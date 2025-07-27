@@ -1,12 +1,65 @@
 /* ============================ */
 /* === Base & Layout Styling === */
 /* ============================ */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { height: 100%; font-family: 'Inter', sans-serif; background-color: #f4f7fa; color: #333; font-size: 14px; line-height: 1.5; }
-.dashboard-container { display: grid; grid-template-columns: 240px 1fr; grid-template-rows: 1fr; height: 100vh; }
-.main-content { display: flex; flex-direction: column; overflow-y: auto; }
-.dashboard-grid { padding: 30px; flex-grow: 1; display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: auto 1fr; gap: 30px; grid-template-areas: "portfolio-row details" "main-chart    details"; }
-h2 { margin-bottom: 15px; font-size: 1.15em; font-weight: 500; color: #111; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Inter', sans-serif; /* Use Inter font */
+    background-color: #f4f7fa; /* Light background */
+    color: #333; /* Default text color */
+    font-size: 14px; /* Base font size */
+    line-height: 1.5; /* Default line height */
+}
+
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 240px 1fr; /* Fixed sidebar, flexible main */
+    grid-template-rows: 1fr; /* Full height row */
+    height: 100vh; /* Full viewport height */
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column; /* Stack top-bar and content vertically */
+    overflow-y: auto; /* Allow main content to scroll if needed */
+    background-color: #f4f7fa; /* Ensure main area has bg color */
+}
+
+/* Wrapper for the main dashboard grid view */
+.dashboard-grid {
+    padding: 30px; /* Consistent padding */
+    flex-grow: 1; /* Take remaining vertical space */
+    /* display: grid; */ /* Controlled by JS */
+    grid-template-columns: 2fr 1fr; /* Main area takes 2/3, details 1/3 */
+    grid-template-rows: auto 1fr; /* Portfolio row auto height, chart takes rest */
+    gap: 30px; /* Consistent gap */
+    grid-template-areas: /* Define grid areas */
+        "portfolio-row details"
+        "main-chart    details";
+}
+
+/* Wrapper for the portfolio page view */
+.portfolio-page-content {
+    padding: 30px;
+    flex-grow: 1;
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin: 0 30px 30px 30px; /* No top margin */
+    /* display: none; */ /* Controlled by JS */
+}
+
+/* General Heading Style */
+h2 {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #111;
+}
 
 /* ================================= */
 /* === Stock Portfolio Row Styling === */
@@ -95,14 +148,9 @@ h2 { margin-bottom: 15px; font-size: 1.15em; font-weight: 500; color: #111; }
 .sidebar-header { padding-top: 10px; text-align: center; margin-bottom: 10px; }
 .sidebar-title { font-size: 1.2em; font-weight: 700; color: #111; }
 .sidebar-watchlist { /* Container */ }
-.watchlist-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; margin-bottom: 5px; border-radius: 6px; text-decoration: none; color: inherit; transition: background-color 0.2s ease; border: 1px solid #eee; cursor: pointer; /* Make it clear it's clickable */ }
+.watchlist-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; margin-bottom: 5px; border-radius: 6px; text-decoration: none; color: inherit; transition: background-color 0.2s ease; border: 1px solid #eee; cursor: pointer; }
 .watchlist-item:hover { background-color: #f5f5f5; }
-/* === NEW: Active Watchlist Item Style === */
-.watchlist-item.active {
-    background-color: #e8e8e8; /* Example active style */
-    border-color: #ccc;
-}
-/* === END NEW === */
+.watchlist-item.active { background-color: #e8e8e8; border-color: #ccc; }
 .watchlist-ticker { font-size: 0.9em; font-weight: 500; color: #333; }
 .watchlist-details { text-align: right; }
 .watchlist-value { font-size: 0.9em; color: #555; display: block; }
@@ -113,7 +161,7 @@ h2 { margin-bottom: 15px; font-size: 1.15em; font-weight: 500; color: #111; }
 .menu-title { font-size: 0.7em; font-weight: 700; color: #aaa; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; padding: 0 10px; }
 .sidebar-menu ul { list-style: none; padding: 0; margin: 0; }
 .sidebar-menu li { margin-bottom: 5px; }
-.menu-item { display: flex; align-items: center; padding: 10px; border-radius: 6px; text-decoration: none; color: #555; transition: background-color 0.2s ease, color 0.2s ease; font-size: 0.9em; font-weight: 500; }
+.menu-item { display: flex; align-items: center; padding: 10px; border-radius: 6px; text-decoration: none; color: #555; transition: background-color 0.2s ease, color 0.2s ease; font-size: 0.9em; font-weight: 500; cursor: pointer; }
 .menu-item:hover { background-color: #f0f0f0; color: #222; }
 .menu-item.active { background-color: #e8e8e8; color: #111; font-weight: 500; }
 .menu-icon { width: 20px; text-align: center; margin-right: 12px; font-size: 1em; color: #888; }
@@ -132,4 +180,78 @@ h2 { margin-bottom: 15px; font-size: 1.15em; font-weight: 500; color: #111; }
 .user-details { display: flex; flex-direction: column; line-height: 1.3; }
 .user-name { font-weight: 500; font-size: 0.9em; color: #333; }
 .user-email { font-size: 0.75em; color: #777; }
+
+/* === START: Portfolio Page Table Styles (Refined for image_a6a219 / a62d5e) === */
+.portfolio-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+}
+
+.portfolio-table th,
+.portfolio-table td {
+    text-align: left;
+    padding: 18px 12px;
+    vertical-align: middle;
+}
+
+/* Border only below the header row */
+.portfolio-table th {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Border below normal rows, but not last */
+.portfolio-table tbody tr td {
+     border-bottom: 1px solid #f0f0f0; /* Lighter row separator */
+}
+.portfolio-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+.portfolio-table th {
+    background-color: transparent;
+    font-weight: 500;
+    font-size: 0.75em;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.portfolio-table td {
+    font-size: 0.9em;
+    color: #333;
+    font-weight: 400;
+}
+
+/* Align numeric data cells (td) */
+.portfolio-table td:nth-child(3), /* Quantity */
+.portfolio-table td:nth-child(4), /* Value */
+.portfolio-table td:nth-child(5) { /* Change */
+    text-align: right;
+    font-weight: 500;
+}
+
+/* === START: Align numeric headers (th) === */
+.portfolio-table th:nth-child(3), /* Quantity */
+.portfolio-table th:nth-child(4), /* Value */
+.portfolio-table th:nth-child(5) { /* Change */
+    text-align: right;
+}
+/* === END: Align numeric headers (th) === */
+
+
+/* Apply positive/negative colors to change column */
+.portfolio-table td .positive { color: #28a745; font-weight: 500; }
+.portfolio-table td .negative { color: #dc3545; font-weight: 500; }
+
+/* Refined container style */
+.portfolio-page-content {
+    padding: 30px;
+    flex-grow: 1;
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin: 0 30px 30px 30px; /* No top margin */
+}
+/* === END Refined Portfolio Page Table Styles === */
 
